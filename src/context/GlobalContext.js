@@ -4,9 +4,8 @@ const GlobalContext = createContext()
 
 const GlobalContextProvider = (props) => {
     const [token, setToken] = useState(localStorage.getItem('token'))
-    const [load, setLoad] = useState(false)
 
-    return <GlobalContext.Provider value={{  token, setToken, load, setLoad }}>
+    return <GlobalContext.Provider value={{  token, setToken }}>
         {props.children}
     </GlobalContext.Provider>
 }
