@@ -17,7 +17,7 @@ const LoginComponent = () => {
   return (
     <div className="container">
       <div className="row m-5 no-gutters shadow-lg">
-        <div className="col-md-6 d-none d-md-block">
+        <div className="col-md-5 d-none d-md-block">
           <ImageComponent />
         </div>
         <div className="col-md-6 bg-white p-5">

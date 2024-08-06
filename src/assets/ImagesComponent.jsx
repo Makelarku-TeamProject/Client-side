@@ -1,5 +1,6 @@
+import imageLogin from '../assets/Login.png';
 const Images = {
-    Image : "https://rb.gy/uuvb73"
+    Image : imageLogin
 }
 
 export default Images
