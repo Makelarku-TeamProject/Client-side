@@ -6,6 +6,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import CustomerComponent from "../components/CustomerComponent";
 import NotFoundComponent from "../components/NotfoundComponent.jsx";
 import CategoriesPage from "../pages/CategoriesPage.jsx";
+import MemberPage from "../pages/MemberPage.jsx";
 import DashboardPage from "../pages/DashboardPage.jsx";
 
 const AppRouter = () => {
@@ -14,10 +15,16 @@ const AppRouter = () => {
       {/* Public routes */}
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<LoginPage />} />
-      {/* Shared page for admin and member */}
-      <Route element={<ProtectedRoute allowedRoles={["admin", "member"]} />}>
+
+      {/* Shared page for admin */}
+      <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/categories" element={<CategoriesPage />} />
+      </Route>
+
+      {/* Shared page for member */}
+      <Route element={<ProtectedRoute allowedRoles={["member"]} />}>
+        <Route path="/member-dashboard" element={<MemberPage />} />
       </Route>
 
       {/* Protected route for customer only */}

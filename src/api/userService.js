@@ -8,7 +8,8 @@ const register = async (username, email, password, role) => {
         })
         return response.data
     } catch (error) {
-        throw error.response ? error.response.data : new Error('Error register')
+        console.error('API error:', error);
+        throw error;
     }
 }
 
@@ -19,7 +20,8 @@ const login = async (email, password) => {
         })
         return response.data
     } catch (error) {
-        throw error.response ? error.response.data : new Error('Error login')
+        console.error('API error:', error);
+        throw error;
     }
 }
 

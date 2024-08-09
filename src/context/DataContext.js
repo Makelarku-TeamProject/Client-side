@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext, useCallback } from 'react';
 import {jwtDecode} from 'jwt-decode';
+import { toast } from 'react-toastify';
 import categoryService from '../api/categoryService';
 import { AuthContext } from './AuthContext';
 
@@ -48,6 +49,7 @@ const DataProvider = ({ children }) => {
         if (auth?.token) {
             try {
                 await categoryService.addCategoryData(auth.token, categoryData);
+                toast.success('Data Stored successful!');
                 fetchCategories();  
                 setError(null);
             } catch (err) {
@@ -63,6 +65,7 @@ const DataProvider = ({ children }) => {
         if (auth?.token) {
             try {
                 await categoryService.updateCategoryData(auth.token, categoryId, categoryData);
+                toast.success('Data Updated successful!');
                 fetchCategories();  
                 setError(null);
             } catch (err) {
@@ -78,6 +81,7 @@ const DataProvider = ({ children }) => {
         if (auth?.token) {
             try {
                 await categoryService.deleteCategoryData(auth.token, categoryId);
+                toast.success('Data Deleted successful!');
                 fetchCategories();  
                 setError(null);
             } catch (err) {
