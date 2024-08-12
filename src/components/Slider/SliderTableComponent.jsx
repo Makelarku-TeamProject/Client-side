@@ -4,6 +4,7 @@ import { Button, Input } from 'antd';
 
 const SliderTableComponent = ({ sliders, onDelete }) => {
     useEffect(() => {
+        // Ensure Fancybox is available before initializing
         if (window.Fancybox) {
             window.Fancybox.bind('[data-fancybox="gallery"]');
         } else {
