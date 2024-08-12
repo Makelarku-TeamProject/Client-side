@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import { Button, Input } from 'antd';
 
-const HouseTableComponent = ({ houses, onDelete }) => {
+const HouseTableComponent = ({ categories, houses, onDelete }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredHouses, setFilteredHouses] = useState([]);
 
@@ -36,20 +36,28 @@ const HouseTableComponent = ({ houses, onDelete }) => {
         { name: 'Location', selector: row => row.location, sortable: true },
         { name: 'Price', selector: row => row.price, sortable: true },
         {
+            name: 'Category', selector: row => {
+                const category = categories.find(category => category.id === row.categoryId)
+                return category.name
+            }, sortable: true
+        },
+        {
             name: 'Image',
             cell: row => (
-                <a
-                    data-fancybox="gallery"
-                    href={row.image_url} // URL of the image
-                    data-caption={row.name} // Caption for the image
-                >
-                    <img
-                        src={row.image_url}
-                        alt={row.name}
-                        className="img-thumbnail"
-                        style={{ width: 100, height: 60, objectFit: 'cover' }}
-                    />
-                </a>
+                row.images.map((image) => (
+                    <a
+                        data-fancybox="gallery"
+                        href={image} // URL of the image
+                        data-caption={row.name} // Caption for the image
+                    >
+                        <img
+                            src={image}
+                            alt={row.name}
+                            className="img-thumbnail"
+                            style={{ width: 100, height: 60, objectFit: 'cover' }}
+                        />
+                    </a>
+                ))
             ),
             sortable: false,
         },

@@ -3,14 +3,13 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProtectedRoute from "../components/ProtectedRoute";
-import CustomerComponent from "../components/CustomerComponent";
+import CustomerPage from "../pages/CustomerPage";
 import NotFoundComponent from "../components/NotfoundComponent";
 import CategoriesPage from "../pages/CategoriesPage";
 import HousesPage from "../pages/HousesPage";
 import SlidersPage from "../pages/SliderPage";
 import MemberPage from "../pages/MemberPage";
 import DashboardPage from "../pages/DashboardPage";
-import CustomerPage from "../pages/CustomerPage";
 
 const AppRouter = () => {
   return (

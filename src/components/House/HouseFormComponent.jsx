@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Select, Form, Input, Button } from 'antd';
 
-const HouseFormComponent = ({ form, onSubmit }) => {
+const HouseFormComponent = ({ categories, form, onSubmit }) => {
     const [files, setFiles] = useState([]);
 
     const handleFileChange = (e) => {
@@ -11,7 +11,7 @@ const HouseFormComponent = ({ form, onSubmit }) => {
     const handleSubmit = async (values) => {
         const formData = new FormData();
         for (let i = 0; i < files.length; i++) {
-            formData.append('images', files[i]);
+            formData.append('house_images', files[i]);
         }
         // Append other form data
         formData.append('name', values.name);
@@ -21,6 +21,7 @@ const HouseFormComponent = ({ form, onSubmit }) => {
         formData.append('price', values.price);
         formData.append('description', values.description);
         formData.append('categoryId', values.categoryId);
+        
 
         try {
             await onSubmit(formData);
@@ -55,8 +56,13 @@ const HouseFormComponent = ({ form, onSubmit }) => {
                 <Input.TextArea placeholder="Description" />
             </Form.Item>
             <Form.Item name="categoryId" rules={[{ required: true, message: 'Please select a category!' }]}>
-                <Input placeholder="Category ID" />
+                <Select placeholder="Select Category">
+                    {categories.map((category)=>(
+                        <Select.Option value={category.id}>{category.name}</Select.Option>
+                    ))}
+                </Select>
             </Form.Item>
+
             <Form.Item>
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">

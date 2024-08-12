@@ -6,21 +6,18 @@ import HouseFormComponent from '../components/House/HouseFormComponent';
 import HouseTableComponent from '../components/House/HouseTableComponent';
 
 const HousesPage = () => {
-    const { houses, houseLoading, houseError, addHouse, updateHouse, deleteHouse, fetchHouses } = useContext(DataContext);
+    const { houses, houseLoading, houseError, addHouse, deleteHouse, fetchHouses, fetchCategories, categories } = useContext(DataContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [form] = Form.useForm();
 
     useEffect(() => {
         fetchHouses();
-    }, [fetchHouses]);
+        fetchCategories();
+    }, [fetchHouses, fetchCategories]);
 
     const handleSubmit = async (values) => {
         try {
-            if (values.id) {
-                await updateHouse(values.id, { ...values });
-            } else {
-                await addHouse({ ...values });
-            }
+            await addHouse(values);
             form.resetFields();
         } catch (err) {
             console.error('Failed to submit house:', err);
@@ -50,11 +47,12 @@ const HousesPage = () => {
                         <div className="row">
                             <div className="col-4">
                                 {/* Form Section */}
-                                <HouseFormComponent form={form} onSubmit={handleSubmit} />
+                                <HouseFormComponent categories={categories} form={form} onSubmit={handleSubmit} />
                             </div>
                             <div className="col-8">
                                 {/* Data Table Section */}
                                 <HouseTableComponent
+                                    categories={categories}
                                     houses={houses}
                                     onEdit={handleEdit}
                                     onDelete={handleDelete}
