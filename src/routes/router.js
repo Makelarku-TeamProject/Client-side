@@ -10,6 +10,7 @@ import HousesPage from "../pages/HousesPage";
 import SlidersPage from "../pages/SliderPage";
 import MemberPage from "../pages/MemberPage";
 import DashboardPage from "../pages/DashboardPage";
+import CustomerPage from "../pages/CustomerPage";
 
 const AppRouter = () => {
   return (
@@ -33,7 +34,7 @@ const AppRouter = () => {
 
       {/* Protected route for customer only */}
       <Route element={<ProtectedRoute allowedRoles={["customer"]} />}>
-        <Route path="/customer-dashboard" element={<CustomerComponent />} />
+        <Route path="/customer-dashboard" element={<CustomerPage />} />
       </Route>
 
       {/* Catch-all for 404 errors */}
