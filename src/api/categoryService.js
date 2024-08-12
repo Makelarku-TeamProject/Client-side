@@ -21,25 +21,23 @@ const addCategoryData = async (token, categoryData) => {
     }
 };
 
-// Function to update a category
 const updateCategoryData = async (token, categoryId, categoryData) => {
     try {
         const response = await axios.patch(`${hostTarget}/categories/${categoryId}`, categoryData, config(token));
-        return response.data; // Return only the data part
+        return response.data; 
     } catch (error) {
         console.error('API error:', error);
-        throw error; // Rethrow error for higher-level handling
+        throw error; 
     }
 };
 
-// Function to delete a category
 const deleteCategoryData = async (token, categoryId) => {
     try {
         const response = await axios.delete(`${hostTarget}/categories/${categoryId}`, config(token));
-        return response.data; // Return only the data part
+        return response.data; 
     } catch (error) {
         console.error('API error:', error);
-        throw error; // Rethrow error for higher-level handling
+        throw error; 
     }
 };
 

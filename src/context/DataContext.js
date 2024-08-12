@@ -1,21 +1,24 @@
 import React, { createContext, useState, useEffect, useContext, useCallback } from 'react';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import categoryService from '../api/categoryService';
+import sliderService from '../api/sliderService';
 import { AuthContext } from './AuthContext';
 
 const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
     const { auth } = useContext(AuthContext);
+
+    // State and handlers for categories
     const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [categoryLoading, setCategoryLoading] = useState(false);
+    const [categoryError, setCategoryError] = useState(null);
 
     const fetchCategories = useCallback(async () => {
         if (auth?.token) {
-            setLoading(true);
-            setError(null);
+            setCategoryLoading(true);
+            setCategoryError(null);
             try {
                 const decodedToken = jwtDecode(auth.token);
                 if (decodedToken.role !== 'admin') {
@@ -32,32 +35,66 @@ const DataProvider = ({ children }) => {
                 }
             } catch (err) {
                 console.error('Error:', err);
-                setError(err.message);
+                setCategoryError(err.message);
             } finally {
-                setLoading(false);
+                setCategoryLoading(false);
             }
         } else {
-            setError('No token provided');
+            setCategoryError('No token provided');
+        }
+    }, [auth?.token]);
+
+    const [sliders, setSliders] = useState([]);
+    const [sliderLoading, setSliderLoading] = useState(false);
+    const [sliderError, setSliderError] = useState(null);
+
+    const fetchSliders = useCallback(async () => {
+        if (auth?.token) {
+            setSliderLoading(true);
+            setSliderError(null);
+            try {
+                const decodedToken = jwtDecode(auth.token);
+                if (decodedToken.role !== 'admin') {
+                    throw new Error('Access denied');
+                }
+
+                const response = await sliderService.getAllSliders(auth.token);
+                const data = response.data.data || response.data;
+
+                if (Array.isArray(data)) {
+                    setSliders(data);
+                } else {
+                    throw new Error('Invalid data format');
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                setSliderError(err.message);
+            } finally {
+                setSliderLoading(false);
+            }
+        } else {
+            setSliderError('No token provided');
         }
     }, [auth?.token]);
 
     useEffect(() => {
         fetchCategories();
-    }, [fetchCategories]);
+        fetchSliders();
+    }, [fetchCategories, fetchSliders]);
 
     const addCategory = async (categoryData) => {
         if (auth?.token) {
             try {
                 await categoryService.addCategoryData(auth.token, categoryData);
-                toast.success('Data Stored successful!');
+                toast.success('Category added successfully!');
                 fetchCategories();  
-                setError(null);
+                setCategoryError(null);
             } catch (err) {
                 console.error('Failed to add category:', err);
-                setError('Failed to add category');
+                setCategoryError('Failed to add category');
             }
         } else {
-            setError('No token provided');
+            setCategoryError('No token provided');
         }
     };
 
@@ -65,15 +102,15 @@ const DataProvider = ({ children }) => {
         if (auth?.token) {
             try {
                 await categoryService.updateCategoryData(auth.token, categoryId, categoryData);
-                toast.success('Data Updated successful!');
+                toast.success('Category updated successfully!');
                 fetchCategories();  
-                setError(null);
+                setCategoryError(null);
             } catch (err) {
                 console.error('Failed to update category:', err);
-                setError('Failed to update category');
+                setCategoryError('Failed to update category');
             }
         } else {
-            setError('No token provided');
+            setCategoryError('No token provided');
         }
     };
 
@@ -81,20 +118,68 @@ const DataProvider = ({ children }) => {
         if (auth?.token) {
             try {
                 await categoryService.deleteCategoryData(auth.token, categoryId);
-                toast.success('Data Deleted successful!');
+                toast.success('Category deleted successfully!');
                 fetchCategories();  
-                setError(null);
+                setCategoryError(null);
             } catch (err) {
                 console.error('Failed to delete category:', err);
-                setError('Failed to delete category');
+                setCategoryError('Failed to delete category');
             }
         } else {
-            setError('No token provided');
+            setCategoryError('No token provided');
+        }
+    };
+
+    const addSlider = async (sliderData) => {
+        if (auth?.token) {
+            try {
+                await sliderService.createSlider(auth.token, sliderData);
+                toast.success('Slider created successfully!');
+                fetchSliders();  
+                setSliderError(null);
+            } catch (err) {
+                console.error('Failed to add slider:', err);
+                setSliderError('Failed to add slider');
+            }
+        } else {
+            setSliderError('No token provided');
+        }
+    };
+
+    const deleteSlider = async (sliderId) => {
+        if (auth?.token) {
+            try {
+                await sliderService.deleteSlider(auth.token, sliderId);
+                toast.success('Slider deleted successfully!');
+                fetchSliders();  
+                setSliderError(null);
+            } catch (err) {
+                console.error('Failed to delete slider:', err);
+                setSliderError('Failed to delete slider');
+            }
+        } else {
+            setSliderError('No token provided');
         }
     };
 
     return (
-        <DataContext.Provider value={{ categories, loading, error, addCategory, updateCategory, deleteCategory, fetchCategories }}>
+        <DataContext.Provider
+            value={{
+                categories,
+                categoryLoading,
+                categoryError,
+                addCategory,
+                updateCategory,
+                deleteCategory,
+                fetchCategories,
+                sliders,
+                sliderLoading,
+                sliderError,
+                addSlider,
+                deleteSlider,
+                fetchSliders,
+            }}
+        >
             {children}
         </DataContext.Provider>
     );

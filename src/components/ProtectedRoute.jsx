@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { GlobalContext } from '../context/GlobalContext';
-import { jwtDecode } from 'jwt-decode';// Ensure correct import// Ensure correct import
+import { jwtDecode } from 'jwt-decode';
 
 const ProtectedRoute = ({ allowedRoles }) => {
   const { auth, setAuth } = useContext(AuthContext);
