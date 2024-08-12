@@ -4,11 +4,12 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import CustomerComponent from "../components/CustomerComponent";
-import NotFoundComponent from "../components/NotfoundComponent.jsx";
-import CategoriesPage from "../pages/CategoriesPage.jsx";
-import SlidersPage from "../pages/SliderPage.jsx";
-import MemberPage from "../pages/MemberPage.jsx";
-import DashboardPage from "../pages/DashboardPage.jsx";
+import NotFoundComponent from "../components/NotfoundComponent";
+import CategoriesPage from "../pages/CategoriesPage";
+import HousesPage from "../pages/HousesPage";
+import SlidersPage from "../pages/SliderPage";
+import MemberPage from "../pages/MemberPage";
+import DashboardPage from "../pages/DashboardPage";
 
 const AppRouter = () => {
   return (
@@ -22,6 +23,7 @@ const AppRouter = () => {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/sliders" element={<SlidersPage />} />
+        <Route path="/houses" element={<HousesPage />} />
       </Route>
 
       {/* Shared page for member */}

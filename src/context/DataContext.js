@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext, useCallback } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
+import houseService from '../api/houseService'; 
 import categoryService from '../api/categoryService';
 import sliderService from '../api/sliderService';
 import { AuthContext } from './AuthContext';
@@ -10,10 +11,49 @@ const DataContext = createContext();
 const DataProvider = ({ children }) => {
     const { auth } = useContext(AuthContext);
 
-    // State and handlers for categories
+    // TODO : State and handlers for houses
+    const [houses, setHouses] = useState([]);
+    const [houseLoading, setHouseLoading] = useState(false);
+    const [houseError, setHouseError] = useState(null);
+
+    // TODO : State and handlers for categories
     const [categories, setCategories] = useState([]);
     const [categoryLoading, setCategoryLoading] = useState(false);
     const [categoryError, setCategoryError] = useState(null);
+
+    // TODO : State and handlers for sliders
+    const [sliders, setSliders] = useState([]);
+    const [sliderLoading, setSliderLoading] = useState(false);
+    const [sliderError, setSliderError] = useState(null);
+
+    const fetchHouses = useCallback(async () => {
+        if (auth?.token) {
+            setHouseLoading(true);
+            setHouseError(null);
+            try {
+                const decodedToken = jwtDecode(auth.token);
+                if (decodedToken.role !== 'admin') {
+                    throw new Error('Access denied');
+                }
+
+                const response = await houseService.getAllHouses(auth.token);
+                const data = response.data.data || response.data;
+
+                if (Array.isArray(data)) {
+                    setHouses(data);
+                } else {
+                    throw new Error('Invalid data format');
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                setHouseError(err.message);
+            } finally {
+                setHouseLoading(false);
+            }
+        } else {
+            setHouseError('No token provided');
+        }
+    }, [auth?.token]);
 
     const fetchCategories = useCallback(async () => {
         if (auth?.token) {
@@ -43,10 +83,6 @@ const DataProvider = ({ children }) => {
             setCategoryError('No token provided');
         }
     }, [auth?.token]);
-
-    const [sliders, setSliders] = useState([]);
-    const [sliderLoading, setSliderLoading] = useState(false);
-    const [sliderError, setSliderError] = useState(null);
 
     const fetchSliders = useCallback(async () => {
         if (auth?.token) {
@@ -78,9 +114,43 @@ const DataProvider = ({ children }) => {
     }, [auth?.token]);
 
     useEffect(() => {
+        fetchHouses();
         fetchCategories();
         fetchSliders();
-    }, [fetchCategories, fetchSliders]);
+    }, [fetchHouses, fetchCategories, fetchSliders]);
+
+    const addHouse = async (houseData) => {
+        if (auth?.token) {
+            try {
+                await houseService.createHouse(auth.token, houseData);
+                toast.success('House added successfully!');
+                fetchHouses();  
+                setHouseError(null);
+            } catch (err) {
+                console.error('Failed to add house:', err);
+                setHouseError('Failed to add house');
+            }
+        } else {
+            setHouseError('No token provided');
+        }
+    };
+
+
+    const deleteHouse = async (houseId) => {
+        if (auth?.token) {
+            try {
+                await houseService.deleteHouse(auth.token, houseId);
+                toast.success('House deleted successfully!');
+                fetchHouses();  
+                setHouseError(null);
+            } catch (err) {
+                console.error('Failed to delete house:', err);
+                setHouseError('Failed to delete house');
+            }
+        } else {
+            setHouseError('No token provided');
+        }
+    };
 
     const addCategory = async (categoryData) => {
         if (auth?.token) {
@@ -165,6 +235,12 @@ const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider
             value={{
+                houses,
+                houseLoading,
+                houseError,
+                addHouse,
+                deleteHouse,
+                fetchHouses,
                 categories,
                 categoryLoading,
                 categoryError,

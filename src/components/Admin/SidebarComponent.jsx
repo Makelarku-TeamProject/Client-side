@@ -21,7 +21,7 @@ const Sidebar = ({ active }) => {
             <span className="ml-2">Category</span>
           </a>
         )}
-        <a href="#" className="list-group-item list-group-item-action border-0 align-items-center">
+        <a href="#" onClick={() => navigate("/houses")} className="list-group-item list-group-item-action border-0 align-items-center">
           <span className="bi bi-box"></span>
           <span className="ml-2">House</span>
         </a>
