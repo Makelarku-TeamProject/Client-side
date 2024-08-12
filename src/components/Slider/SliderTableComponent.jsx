@@ -1,16 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import { Button, Input } from 'antd';
 
 const SliderTableComponent = ({ sliders, onDelete }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredSliders, setFilteredSliders] = useState(sliders);
+
     useEffect(() => {
-        // Ensure Fancybox is available before initializing
         if (window.Fancybox) {
             window.Fancybox.bind('[data-fancybox="gallery"]');
         } else {
             console.error('Fancybox is not loaded');
         }
     }, []);
+
+    useEffect(() => {
+        const filtered = sliders.filter(slider =>
+            slider.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredSliders(filtered);
+    }, [searchTerm, sliders]);
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
 
     const columns = [
         { name: 'ID', selector: row => row.id, sortable: true },
@@ -37,8 +50,8 @@ const SliderTableComponent = ({ sliders, onDelete }) => {
             name: 'Actions',
             cell: row => (
                 <Button onClick={() => onDelete(row.id)} className='btn btn-danger btn-sm'>Delete</Button>
-            )
-        }
+            ),
+        },
     ];
 
     return (
@@ -47,11 +60,13 @@ const SliderTableComponent = ({ sliders, onDelete }) => {
                 <Input
                     type="text"
                     placeholder="Search..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
                 />
             </div>
             <DataTable
                 columns={columns}
-                data={sliders}
+                data={filteredSliders}
                 pagination
                 highlightOnHover
                 striped
