@@ -4,128 +4,12 @@ const SectionContact = () => {
       <section id="campaign-banner" className="campaign-banner">
         <div className="container">
           <div className="row">
-            <div className="col-md-12 text-center mb-4 mt-5">
+            <div className="col-md-12 text-center mb-4 mt-5 ml-5">
               <h2>Contact From US !!!</h2>
               <p>
                 Jangan ragu untuk menghubungi kami jika Anda memiliki pertanyaan
                 atau permintaan khusus.
               </p>
-            </div>
-            <div id="promoCarousel" className="carousel slide" data-ride="carousel">
-              <ol className="carousel-indicators">
-                <li
-                  data-target="#promoCarousel"
-                  data-slide-to="0"
-                  className="active"
-                ></li>
-                <li data-target="#promoCarousel" data-slide-to="1"></li>
-                <li data-target="#promoCarousel" data-slide-to="2"></li>
-              </ol>
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <div
-                    className="campaign-banner-content d-flex flex-column flex-md-row align-items-center"
-                    style={{
-                      backgroundColor: "rgba(252, 138, 49, 255)",
-                      padding: "20px",
-                      borderRadius: "10px",
-                      color: "white",
-                    }}
-                  >
-                    <img
-                      src="https://via.placeholder.com/300x150"
-                      className="img-fluid"
-                      alt="Promo 1"
-                      style={{ borderRadius: "10px", marginRight: "20px" }}
-                    />
-                    <div className="text-left">
-                      <h4>Diskon 10% untuk Pembelian Tunai</h4>
-                      <p>
-                        Berlaku hingga akhir bulan ini. Cicilan 0% hingga 24
-                        Bulan untuk properti tertentu. Dapatkan hadiah langsung
-                        tanpa diundi!
-                      </p>
-                      <button className="btn btn-warning">Lihat Detail</button>
-                    </div>
-                  </div>
-                </div>
-                <div className="carousel-item">
-                  <div
-                    className="campaign-banner-content d-flex flex-column flex-md-row align-items-center"
-                    style={{
-                      backgroundColor: "rgba(252, 138, 49, 255)",
-                      padding: "20px",
-                      borderRadius: "10px",
-                      color: "white",
-                    }}
-                  >
-                    <img
-                      src="https://via.placeholder.com/300x150"
-                      alt="Promo 2"
-                      className="img-fluid"
-                      style={{ borderRadius: "10px", marginRight: "20px" }}
-                    />
-                    <div className="text-left">
-                      <h4>Gratis Biaya Notaris</h4>
-                      <p>
-                        Untuk setiap pembelian properti selama bulan ini, gratis
-                        biaya notaris dan biaya administrasi! GRAAATTISSSSS!!!!
-                      </p>
-                      <button className="btn btn-warning">Lihat Detail</button>
-                    </div>
-                  </div>
-                </div>
-                <div className="carousel-item">
-                  <div
-                    className="campaign-banner-content d-flex flex-column flex-md-row align-items-center"
-                    style={{
-                      backgroundColor: "rgba(252, 138, 49, 255)",
-                      padding: "20px",
-                      borderRadius: "10px",
-                      color: "white",
-                    }}
-                  >
-                    <img
-                      src="https://via.placeholder.com/300x150"
-                      alt="Promo 3"
-                      className="img-fluid"
-                      style={{ borderRadius: "10px", marginRight: "20px" }}
-                    />
-                    <div className="text-left">
-                      <h4>Voucher Belanja Rp 5.000.000</h4>
-                      <p>
-                        Bagi pembelian properti tertentu, dapatkan voucher
-                        belanja senilai Rp 5.000.000! WOWWWW HEBAT BANGETTTT
-                      </p>
-                      <button className="btn btn-warning">Lihat Detail</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a
-                className="carousel-control-prev"
-                href="#promoCarousel"
-                role="button"
-                data-slide="prev"
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="sr-only">Previous</span>
-              </a>
-              <a
-                className="carousel-control-next"
-                href="#promoCarousel"
-                role="button"
-                data-slide="next"
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="sr-only">Next</span>
-              </a>
             </div>
           </div>
         </div>
@@ -150,7 +34,7 @@ const SectionContact = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-5">
+            <div className="col-md-5 mt-5">
               <div className="card border-0 shadow-sm rounded">
                 <div className="card-body">
                   <h3>Kontak kami</h3>
@@ -159,7 +43,7 @@ const SectionContact = () => {
                     Jendral Sudirman No.83, Daerah Khusus Ibukota Jakarta,
                     Indonesia
                     <i className="fas fa-phone"></i> +6282332224930
-                    <i className="fas fa-envelope"></i> makelarku@punyahafizh.sch.id
+                    <i className="fas fa-envelope"></i> makelarku@MakelarkuTeam
                   </p>
                 </div>
               </div>

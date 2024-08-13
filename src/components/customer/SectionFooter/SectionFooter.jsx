@@ -79,7 +79,7 @@ const SectionFooter = () => {
       <div className="text-center p-3 bg-light">
         ©<script>document.write( new Date().getFullYear() )</script> Copyright:
         <a className="text-reset fw-bold" href="#">
-          Muhammad Hafizh Azzasafah
+          Makelarku
         </a>
       </div>
     </footer>
