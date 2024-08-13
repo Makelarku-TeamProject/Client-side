@@ -39,6 +39,7 @@ const LoginComponent = () => {
                     size="large"
                     placeholder="Email"
                     value={credentials.email}
+                    data-testid="input-email"
                     onChange={(e) =>
                       setCredentials({ ...credentials, email: e.target.value })
                     }
@@ -57,6 +58,7 @@ const LoginComponent = () => {
                     size="large"
                     placeholder="Password"
                     value={credentials.password}
+                    data-testid="input-password"
                     onChange={(e) =>
                       setCredentials({ ...credentials, password: e.target.value })
                     }
@@ -72,7 +74,8 @@ const LoginComponent = () => {
                 <button
                   type="submit"
                   className="btn btn-dark w-100 font-weight-bold mt-2"
-                  disabled={loading}>
+                  disabled={loading}
+                  data-testid="button-signin">
                   {loading ? <Spin size="sm" /> : "Sign In"}
                 </button>
               </div>

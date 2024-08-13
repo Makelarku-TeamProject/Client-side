@@ -41,6 +41,7 @@ const LoginComponent = () => {
                     placeholder="Username"
                     size="large"
                     value={credentials.username}
+                    data-testid="input-username"
                     onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
                   />
                 </Form.Item>
@@ -57,6 +58,7 @@ const LoginComponent = () => {
                     size="large"
                     placeholder="Email"
                     value={credentials.email}
+                    data-testid="input-email"
                     onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
                   />
                 </Form.Item>
@@ -73,6 +75,7 @@ const LoginComponent = () => {
                     size="large"
                     placeholder="Password"
                     value={credentials.password}
+                    data-testid="input-password"
                     onChange={(e) =>
                       setCredentials({ ...credentials, password: e.target.value })
                     }
@@ -85,7 +88,7 @@ const LoginComponent = () => {
                   value={credentials.role}
                   onChange={(e) => setCredentials({ ...credentials, role: e.target.value })}
                 >
-                  <Radio value="member">Member</Radio>
+                  <Radio value="member" data-testid="radio-role-member">Member</Radio>
                   <Radio value="customer">Customer</Radio>
                 </Radio.Group>
               </div>
@@ -97,7 +100,8 @@ const LoginComponent = () => {
               <div className="pb-2">
                 <button
                   type="submit"
-                  className="btn btn-dark w-100 font-weight-bold mt-2">
+                  className="btn btn-dark w-100 font-weight-bold mt-2"
+                  data-testid="button-register">
                   Register
                 </button>
               </div>
