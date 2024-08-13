@@ -31,10 +31,7 @@ const DataProvider = ({ children }) => {
             setHouseLoading(true);
             setHouseError(null);
             try {
-                const decodedToken = jwtDecode(auth.token);
-                if (decodedToken.role !== 'admin') {
-                    throw new Error('Access denied');
-                }
+                
 
                 const response = await houseService.getAllHouses(auth.token);
                 const data = response.data.data || response.data;

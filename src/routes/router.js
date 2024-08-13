@@ -23,6 +23,10 @@ const AppRouter = () => {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/sliders" element={<SlidersPage />} />
+      </Route>
+
+       {/* Shared page for admin  && member */}
+      <Route element={<ProtectedRoute allowedRoles={["admin","member"]} />}>
         <Route path="/houses" element={<HousesPage />} />
       </Route>
 

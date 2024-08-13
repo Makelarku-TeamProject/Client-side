@@ -1,9 +1,15 @@
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { AuthContext } from '../../../context/AuthContext';
+
 const SectionNavbar = () => {
   const navigate = useNavigate();
+  const { logout } = useContext(AuthContext);
 
-  const handleClick = () => {
-      console.log('Aku diclick');
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout(); // Call the logout function from context
+    navigate('/login'); // Redirect to login page
   };
   return (
     <section id="navbar">
@@ -16,7 +22,7 @@ const SectionNavbar = () => {
             alt="House Logo"
           />
         </a>
-        <button 
+        <button
           className="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -28,7 +34,12 @@ const SectionNavbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+        <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <a className="nav-link" href="#" onClick={handleLogout}>
+                <i className="bi bi-box-arrow-right"> Logout</i>
+              </a>
+            </li>
           </ul>
         </div>
       </nav>
