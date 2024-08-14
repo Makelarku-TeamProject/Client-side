@@ -1,5 +1,5 @@
 const SectionFooter = () => {
-  console.log('a')
+  console.log('abc')
   return (
     <footer
       className="footer"

@@ -1,5 +1,5 @@
 const SectionHero = () => {
-  console.log('a')
+  console.log('abc')
   return (
     <section id="hero">
       <div

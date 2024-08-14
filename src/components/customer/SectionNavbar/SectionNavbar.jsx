@@ -5,7 +5,7 @@ import { AuthContext } from '../../../context/AuthContext';
 const SectionNavbar = () => {
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
-  console.log('a')
+  console.log('abc')
   const handleLogout = (e) => {
     e.preventDefault();
     logout(); // Call the logout function from context
