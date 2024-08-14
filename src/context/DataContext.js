@@ -31,8 +31,6 @@ const DataProvider = ({ children }) => {
             setHouseLoading(true);
             setHouseError(null);
             try {
-                
-
                 const response = await houseService.getAllHouses(auth.token);
                 const data = response.data.data || response.data;
 
@@ -57,11 +55,6 @@ const DataProvider = ({ children }) => {
             setCategoryLoading(true);
             setCategoryError(null);
             try {
-                const decodedToken = jwtDecode(auth.token);
-                if (decodedToken.role !== 'admin') {
-                    throw new Error('Access denied');
-                }
-
                 const response = await categoryService.getCategoryData(auth.token);
                 const data = response.data.data || response.data;
 
@@ -86,11 +79,6 @@ const DataProvider = ({ children }) => {
             setSliderLoading(true);
             setSliderError(null);
             try {
-                const decodedToken = jwtDecode(auth.token);
-                if (decodedToken.role !== 'admin') {
-                    throw new Error('Access denied');
-                }
-
                 const response = await sliderService.getAllSliders(auth.token);
                 const data = response.data.data || response.data;
 

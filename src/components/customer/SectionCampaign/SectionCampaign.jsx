@@ -1,7 +1,24 @@
+import React, { useContext, useEffect } from 'react';
+import { DataContext } from '../../../context/DataContext'; // Adjust the path to where DataContext is defined
+
 const SectionCampaign = () => {
+  const { sliders, sliderLoading, sliderError, fetchSliders } = useContext(DataContext);
+
+  useEffect(() => {
+    fetchSliders();
+  }, [fetchSliders]);
+
+  if (sliderLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (sliderError) {
+    return <div>Error: {sliderError}</div>;
+  }
+
   return (
     <div>
-     <section id="campaign-banner" className="campaign-banner">
+      <section id="campaign-banner" className="campaign-banner">
         <div className="container">
           <div className="row">
             <div className="col-md-12 text-center mb-4 mt-5">
@@ -13,94 +30,53 @@ const SectionCampaign = () => {
             </div>
             <div id="promoCarousel" className="carousel slide" data-ride="carousel">
               <ol className="carousel-indicators">
-                <li
-                  data-target="#promoCarousel"
-                  data-slide-to="0"
-                  className="active"
-                ></li>
-                <li data-target="#promoCarousel" data-slide-to="1"></li>
-                <li data-target="#promoCarousel" data-slide-to="2"></li>
+                {sliders.map((_, index) => (
+                  <li
+                    key={index}
+                    data-target="#promoCarousel"
+                    data-slide-to={index}
+                    className={index === 0 ? "active" : ""}
+                  ></li>
+                ))}
               </ol>
               <div className="carousel-inner">
-                <div className="carousel-item active">
+                {sliders.map((slider, index) => (
                   <div
-                    className="campaign-banner-content d-flex flex-column flex-md-row align-items-center"
-                    style={{
-                      backgroundColor: "rgba(252, 138, 49, 255)",
-                      padding: "20px",
-                      borderRadius: "10px",
-                      color: "white",
-                    }}
+                    key={slider.id}
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
                   >
-                    <img
-                      src="https://via.placeholder.com/300x150"
-                      className="img-fluid"
-                      alt="Promo 1"
-                      style={{ borderRadius: "10px", marginRight: "20px" }}
-                    />
-                    <div className="text-left">
-                      <h4>Diskon 10% untuk Pembelian Tunai</h4>
-                      <p>
-                        Berlaku hingga akhir bulan ini. Cicilan 0% hingga 24
-                        Bulan untuk properti tertentu. Dapatkan hadiah langsung
-                        tanpa diundi!
-                      </p>
-                      <button className="btn btn-warning">Lihat Detail</button>
+                    <div
+                      className="campaign-banner-content d-flex flex-column flex-md-row align-items-center"
+                      style={{
+                        backgroundColor: "rgba(252, 138, 49, 255)",
+                        padding: "20px",
+                        borderRadius: "10px",
+                        color: "white",
+                      }}
+                    >
+                      <img
+                        src={slider.image_url}
+                        className="img-fluid"
+                        alt={`Promo ${index + 1}`}
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          objectFit: "cover", // Ensure the image covers the square area without stretching
+                          borderRadius: "10px",
+                          marginRight: "20px"
+                        }}
+                      />
+                      <div className="text-left">
+                        <h4>{slider.name}</h4> {/* Use the name from the response */}
+                        <p>
+                          {/* You can add a description or any additional information here */}
+                          Promo details for {slider.name} go here.
+                        </p>
+                        <button className="btn btn-warning">Lihat Detail</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="carousel-item">
-                  <div
-                    className="campaign-banner-content d-flex flex-column flex-md-row align-items-center"
-                    style={{
-                      backgroundColor: "rgba(252, 138, 49, 255)",
-                      padding: "20px",
-                      borderRadius: "10px",
-                      color: "white",
-                    }}
-                  >
-                    <img
-                      src="https://via.placeholder.com/300x150"
-                      alt="Promo 2"
-                      className="img-fluid"
-                      style={{ borderRadius: "10px", marginRight: "20px" }}
-                    />
-                    <div className="text-left">
-                      <h4>Gratis Biaya Notaris</h4>
-                      <p>
-                        Untuk setiap pembelian properti selama bulan ini, gratis
-                        biaya notaris dan biaya administrasi! GRAAATTISSSSS!!!!
-                      </p>
-                      <button className="btn btn-warning">Lihat Detail</button>
-                    </div>
-                  </div>
-                </div>
-                <div className="carousel-item">
-                  <div
-                    className="campaign-banner-content d-flex flex-column flex-md-row align-items-center"
-                    style={{
-                      backgroundColor: "rgba(252, 138, 49, 255)",
-                      padding: "20px",
-                      borderRadius: "10px",
-                      color: "white",
-                    }}
-                  >
-                    <img
-                      src="https://via.placeholder.com/300x150"
-                      alt="Promo 3"
-                      className="img-fluid"
-                      style={{ borderRadius: "10px", marginRight: "20px" }}
-                    />
-                    <div className="text-left">
-                      <h4>Voucher Belanja Rp 5.000.000</h4>
-                      <p>
-                        Bagi pembelian properti tertentu, dapatkan voucher
-                        belanja senilai Rp 5.000.000! WOWWWW HEBAT BANGETTTT
-                      </p>
-                      <button className="btn btn-warning">Lihat Detail</button>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
               <a
                 className="carousel-control-prev"
@@ -126,105 +102,6 @@ const SectionCampaign = () => {
                 ></span>
                 <span className="sr-only">Next</span>
               </a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="campaign-banner" className="campaign-banner">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12 text-center mb-4 mt-5">
-              <div className="col-md-12">
-                <div className="row">
-                  <div className="col-md-4 mb-4">
-                    <div className="card property-card">
-                      <img
-                        src="https://via.placeholder.com/350x200"
-                        className="card-img-top"
-                        alt="Properti"
-                      />
-                      <div className="card-body text-center">
-                        <h5 className="property-card-title">Rumah Modern</h5>
-                        <div className="property-details text-left">
-                          <p>
-                            <i className="fa fa-bed"></i> 3 Kamar Tidur
-                          </p>
-                          <p>
-                            <i className="fa fa-bath"></i> 2 Kamar Mandi
-                          </p>
-                          <p>
-                            <i className="fa fa-expand"></i> 150 m²
-                          </p>
-                          <p>
-                            <i className="fa fa-dollar-sign"></i> Rp. 850.000.000
-                          </p>
-                        </div>
-                        <button href="#" className="detail btn btn-primary">
-                          Lihat Detail
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-4">
-                    <div className="card property-card">
-                      <img
-                        src="https://via.placeholder.com/350x200"
-                        className="card-img-top"
-                        alt="Properti"
-                      />
-                      <div className="card-body text-center">
-                        <h5 className="property-card-title">Rumah Modern</h5>
-                        <div className="property-details text-left">
-                          <p>
-                            <i className="fa fa-bed"></i> 3 Kamar Tidur
-                          </p>
-                          <p>
-                            <i className="fa fa-bath"></i> 2 Kamar Mandi
-                          </p>
-                          <p>
-                            <i className="fa fa-expand"></i> 150 m²
-                          </p>
-                          <p>
-                            <i className="fa fa-dollar-sign"></i> Rp. 850.000.000
-                          </p>
-                        </div>
-                        <button href="#" className="btn btn-primary">
-                          Lihat Detail
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-4">
-                    <div className="card property-card">
-                      <img
-                        src="https://via.placeholder.com/350x200"
-                        className="card-img-top"
-                        alt="Properti"
-                      />
-                      <div className="card-body text-center">
-                        <h5 className="property-card-title">Rumah Modern</h5>
-                        <div className="property-details text-left">
-                          <p>
-                            <i className="fa fa-bed"></i> 3 Kamar Tidur
-                          </p>
-                          <p>
-                            <i className="fa fa-bath"></i> 2 Kamar Mandi
-                          </p>
-                          <p>
-                            <i className="fa fa-expand"></i> 150 m²
-                          </p>
-                          <p>
-                            <i className="fa fa-dollar-sign"></i> Rp. 850.000.000
-                          </p>
-                        </div>
-                        <button href="#" className="btn btn-primary">
-                          Lihat Detail
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
