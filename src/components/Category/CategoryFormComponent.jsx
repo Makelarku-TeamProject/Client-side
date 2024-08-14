@@ -4,7 +4,7 @@ import { Form, Input, Button } from 'antd';
 const CategoryFormComponent = ({ form, onSubmit, onEdit }) => {
     return (
         <div className="col-md-4 mb-4">
-            <h2 className="mb-4">Add / Edit Category</h2>
+            <h2 className="mb-4">Add / Edit Categories</h2>
             <Form form={form} onFinish={onSubmit} layout="vertical">
                 <Form.Item name="id" hidden>
                     <Input type="hidden" />
