@@ -169,25 +169,13 @@ const SectionCard = () => {
             )}
             <table className="table table-striped mt-4">
               <tbody>
-                <tr>
-                  <td><strong>ID:</strong></td>
-                  <td>{selectedHouse.id}</td>
-                </tr>
-                <tr>
-                  <td><strong>Created At:</strong></td>
-                  <td>{new Date(selectedHouse.created_at).toLocaleString()}</td>
-                </tr>
-                <tr>
-                  <td><strong>Updated At:</strong></td>
-                  <td>{new Date(selectedHouse.updated_at).toLocaleString()}</td>
+              <tr>
+                  <td><strong>Location:</strong></td>
+                  <td>{selectedHouse.location}</td>
                 </tr>
                 <tr>
                   <td><strong>Number of Rooms:</strong></td>
                   <td>{selectedHouse.num_rooms}</td>
-                </tr>
-                <tr>
-                  <td><strong>Bathrooms:</strong></td>
-                  <td>{selectedHouse.bathrooms}</td>
                 </tr>
                 <tr>
                   <td><strong>Size:</strong></td>
@@ -196,6 +184,10 @@ const SectionCard = () => {
                 <tr>
                   <td><strong>Price:</strong></td>
                   <td>Rp. {selectedHouse.price.toLocaleString()}</td>
+                </tr>
+                <tr>
+                  <td><strong>Description:</strong></td>
+                  <td>{selectedHouse.description}</td>
                 </tr>
               </tbody>
             </table>

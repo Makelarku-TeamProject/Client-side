@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { DataContext } from '../../../context/DataContext'; // Adjust the path to where DataContext is defined
+import { DataContext } from '../../../context/DataContext'; 
 
 const SectionCampaign = () => {
   const { sliders, sliderLoading, sliderError, fetchSliders } = useContext(DataContext);
@@ -61,18 +61,16 @@ const SectionCampaign = () => {
                         style={{
                           width: "100px",
                           height: "100px",
-                          objectFit: "cover", // Ensure the image covers the square area without stretching
+                          objectFit: "cover",
                           borderRadius: "10px",
                           marginRight: "20px"
                         }}
                       />
                       <div className="text-left">
-                        <h4>{slider.name}</h4> {/* Use the name from the response */}
+                        <h4>Promo Properti !!!</h4>
                         <p>
-                          {/* You can add a description or any additional information here */}
                           Promo details for {slider.name} go here.
                         </p>
-                        <button className="btn btn-warning">Lihat Detail</button>
                       </div>
                     </div>
                   </div>

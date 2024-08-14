@@ -7,7 +7,6 @@ const HouseTableComponent = ({ categories, houses, onDelete }) => {
     const [filteredHouses, setFilteredHouses] = useState([]);
 
     useEffect(() => {
-        // Initialize filteredHouses when houses prop is received
         setFilteredHouses(houses);
     }, [houses]);
 
