@@ -6,8 +6,8 @@ const SectionCard = () => {
   const { houses, houseLoading, houseError, fetchHouses, categories } = useContext(DataContext);
   const [selectedHouse, setSelectedHouse] = useState(null); 
   const [isModalVisible, setIsModalVisible] = useState(false); 
-  const [currentPage, setCurrentPage] = useState(1); // Current page
-  const [pageSize] = useState(6); // Number of items per page
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [pageSize] = useState(6); 
 
   useEffect(() => {
     fetchHouses(); 
@@ -35,7 +35,6 @@ const SectionCard = () => {
   if (houseLoading) return <p>Loading...</p>;
   if (houseError) return <p>Error: {houseError}</p>;
 
-  // Calculate the cards to display based on the current page
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
   const paginatedHouses = houses.slice(startIndex, endIndex);
@@ -46,12 +45,10 @@ const SectionCard = () => {
       <section id="cards" className="card-section">
         <div className="container mt-5">
           <div className="row">
-            {/* Categories Sidebar */}
             <div className="col-md-4">
               <div className="title">
                 <h4>
-                  <i className="fa fa-folder" aria-hidden="true"></i> Kategori
-                  Properti
+                  <i className="fa fa-folder" aria-hidden="true"></i> Kategori Properti
                 </h4>
               </div>
               <div className="list-group">
@@ -67,7 +64,6 @@ const SectionCard = () => {
               </div>
             </div>
 
-            {/* Properties List */}
             <div className="col-md-8">
               <div className="row">
                 {paginatedHouses.map((house) => {
@@ -133,7 +129,6 @@ const SectionCard = () => {
                 })}
               </div>
 
-              {/* Pagination */}
               <div className="pagination-container text-center mt-4">
                 <Pagination
                   current={currentPage}
@@ -148,7 +143,6 @@ const SectionCard = () => {
         </div>
       </section>
 
-      {/* Modal for House Details */}
       <Modal
         title="House Details"
         visible={isModalVisible}
@@ -173,13 +167,38 @@ const SectionCard = () => {
                 ))}
               </Carousel>
             )}
-            <p><strong>ID:</strong> {selectedHouse.id}</p>
-            <p><strong>Created At:</strong> {new Date(selectedHouse.created_at).toLocaleString()}</p>
-            <p><strong>Updated At:</strong> {new Date(selectedHouse.updated_at).toLocaleString()}</p>
-            <p><strong>Number of Rooms:</strong> {selectedHouse.num_rooms}</p>
-            <p><strong>Bathrooms:</strong> {selectedHouse.bathrooms}</p>
-            <p><strong>Size:</strong> {selectedHouse.size} m²</p>
-            <p><strong>Price:</strong> Rp. {selectedHouse.price.toLocaleString()}</p>
+            <table className="table table-striped mt-4">
+              <tbody>
+                <tr>
+                  <td><strong>ID:</strong></td>
+                  <td>{selectedHouse.id}</td>
+                </tr>
+                <tr>
+                  <td><strong>Created At:</strong></td>
+                  <td>{new Date(selectedHouse.created_at).toLocaleString()}</td>
+                </tr>
+                <tr>
+                  <td><strong>Updated At:</strong></td>
+                  <td>{new Date(selectedHouse.updated_at).toLocaleString()}</td>
+                </tr>
+                <tr>
+                  <td><strong>Number of Rooms:</strong></td>
+                  <td>{selectedHouse.num_rooms}</td>
+                </tr>
+                <tr>
+                  <td><strong>Bathrooms:</strong></td>
+                  <td>{selectedHouse.bathrooms}</td>
+                </tr>
+                <tr>
+                  <td><strong>Size:</strong></td>
+                  <td>{selectedHouse.sq_ft} m²</td>
+                </tr>
+                <tr>
+                  <td><strong>Price:</strong></td>
+                  <td>Rp. {selectedHouse.price.toLocaleString()}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         )}
       </Modal>

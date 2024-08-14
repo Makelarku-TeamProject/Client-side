@@ -4,6 +4,7 @@ import SectionCampaign from "../components/Customer/SectionCampaign/SectionCampa
 import SectionContact from "../components/Customer/SectionContact/SectionContact";
 import SectionCard from "../components/Customer/SectionCard/SectionCard";
 import SectionHero from "../components/Customer/SectionHero/SectionHero";
+import SectionPartnership from "../components/Customer/SectionPartnership/SectionPartnership";
 import SectionFooter from "../components/Customer/SectionFooter/SectionFooter";
 import '../components/Customer/app.css';
 import { Layout } from "antd";
@@ -15,6 +16,7 @@ const CustomerPage = () => {
         <SectionHero/>
         <SectionCard/>
         <SectionCampaign/>
+        <SectionPartnership/>
         <SectionContact/>
         <SectionFooter/>
     </Layout>
