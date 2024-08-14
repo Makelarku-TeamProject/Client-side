@@ -3,7 +3,7 @@ import { DataContext } from '../../../context/DataContext';
 
 const SectionCampaign = () => {
   const { sliders, sliderLoading, sliderError, fetchSliders } = useContext(DataContext);
-
+  console.log('a')
   useEffect(() => {
     fetchSliders();
   }, [fetchSliders]);

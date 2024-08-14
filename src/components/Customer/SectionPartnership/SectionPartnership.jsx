@@ -18,6 +18,7 @@ const SectionPartnership = () => {
     },
     // Add more partners as needed
   ];
+  console.log('a')
 
   return (
     <div>

@@ -8,7 +8,8 @@ const SectionCard = () => {
   const [isModalVisible, setIsModalVisible] = useState(false); 
   const [currentPage, setCurrentPage] = useState(1); 
   const [pageSize] = useState(6); 
-
+  console.log('a')
+  
   useEffect(() => {
     fetchHouses(); 
   }, [fetchHouses]);

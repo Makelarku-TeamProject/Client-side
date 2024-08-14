@@ -1,4 +1,5 @@
 const SectionContact = () => {
+  console.log('a')
   return (
     <div>
       <section id="campaign-banner" className="campaign-banner">

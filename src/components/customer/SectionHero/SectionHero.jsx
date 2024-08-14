@@ -1,4 +1,5 @@
 const SectionHero = () => {
+  console.log('a')
   return (
     <section id="hero">
       <div
